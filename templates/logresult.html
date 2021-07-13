@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+ 
+{% block content %}
+    <div class="card">
+                        <div class="card-header">
+                            <h4 id="cards" class="card-title">{{ filename }} - Detailed Analysis</h4>
+                            <div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card-content collapse show" aria-expanded="true">
+                            <div class="card-body">
+                                <div class="card-text">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                        <th>IP</th>
+                                        <th>Date</th>
+                                        <th>Request</th>
+                                        <th>User Agent</th>
+                                        <th>Verdict</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for logs in data %}
+                                        <tr>
+                                        <td>{{ logs['IP'] }}</td>
+                                        <td>{{ logs['Date'] }}</td>
+                                        <td><code>{{ logs['Request'] }}</code></td>
+                                        <td><code>{{ logs['User-Agent'] }}</code></td>
+                                        {% if logs['Verdict'] == 'Clean' %}
+                                            <td style="color: #5ebc5e;font-weight: 600;" > Clean</td>
+                                        {% else %}
+                                            <td style="color: #c2383e;font-weight: 600;" > Malicious</td>
+                                        {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>
+                         
+                                
+                                 </div>   
+                            </div>
+                        </div>
+                    </div>
+{% endblock %}
